@@ -18,7 +18,6 @@ export function startREPL() {
       const cmndIndex = Object.keys(cmnds).findIndex((c) => c === cleanIn[0])
       if (cmndIndex === -1) {
         console.log('Unknown command')
-        rl.prompt()
       } else {
         try {
           cmnds[cleanIn[0]].callback(cmnds)
@@ -26,6 +25,7 @@ export function startREPL() {
           console.log(error)
         }
       }
+      rl.prompt()
     }
   })
 }
