@@ -1,31 +1,24 @@
-import { stdin, stdout } from 'node:process'
-import * as readline from 'node:readline/promises'
-import { getCommands } from './command.js'
+import { initState } from './state.js'
 
 export function startREPL() {
-  const rl = readline.createInterface({
-    input: stdin,
-    output: stdout,
-    prompt: 'Pokedex > ',
-  })
-  rl.prompt()
-  rl.on('line', (input) => {
+  const { readline, commands } = initState()
+  readline.prompt()
+  readline.on('line', (input) => {
     const cleanIn = cleanInput(input)
     if (!cleanIn.length) {
-      rl.prompt()
+      readline.prompt()
     } else {
-      const cmnds = getCommands()
-      const cmndIndex = Object.keys(cmnds).findIndex((c) => c === cleanIn[0])
+      const cmndIndex = Object.keys(commands).findIndex((c) => c === cleanIn[0])
       if (cmndIndex === -1) {
         console.log('Unknown command')
       } else {
         try {
-          cmnds[cleanIn[0]].callback(cmnds)
+          commands[cleanIn[0]].callback({ readline, commands })
         } catch (error) {
           console.log(error)
         }
       }
-      rl.prompt()
+      readline.prompt()
     }
   })
 }
