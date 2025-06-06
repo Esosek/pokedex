@@ -1,9 +1,11 @@
 import { initState } from './state.js'
 
 export function startREPL() {
-  const { readline, commands } = initState()
+  const state = initState()
+  const { readline, commands } = state
+
   readline.prompt()
-  readline.on('line', (input) => {
+  readline.on('line', async (input) => {
     const cleanIn = cleanInput(input)
     if (!cleanIn.length) {
       readline.prompt()
@@ -13,7 +15,7 @@ export function startREPL() {
         console.log('Unknown command')
       } else {
         try {
-          commands[cleanIn[0]].callback({ readline, commands })
+          await commands[cleanIn[0]].callback(state)
         } catch (error) {
           console.log(error)
         }
