@@ -18,7 +18,7 @@ export async function commandMap(state: State) {
     if (error instanceof Error) {
       console.log(error.message)
     } else {
-      console.log(error)
+      console.log('An unexpected error occurred')
     }
   }
 }

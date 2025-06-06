@@ -5,11 +5,12 @@ import { PokeAPI } from './pokeapi.js'
 import { commandExit } from './command_exit.js'
 import { commandHelp } from './command_help.js'
 import { commandMap, commandMapb } from './command_map.js'
+import { commandExplore } from './command_explore.js'
 
 export type CLICommand = {
   name: string
   description: string
-  callback: (state: State) => Promise<void>
+  callback: (state: State, ...args: string[]) => Promise<void>
 }
 
 export type State = {
@@ -25,7 +26,7 @@ export function initState(): State {
     readline: createInterface({
       input: stdin,
       output: stdout,
-      prompt: 'Pokedex > ',
+      prompt: 'Pokedex > '
     }),
     pokeAPI: new PokeAPI(),
     nextLocationsURL: '?offset=20',
@@ -34,25 +35,30 @@ export function initState(): State {
       exit: {
         name: 'exit',
         description: 'Exits the pokedex',
-        callback: commandExit,
+        callback: commandExit
       },
       help: {
         name: 'help',
         description: 'Displays a help message',
-        callback: commandHelp,
+        callback: commandHelp
       },
       map: {
         name: 'map',
         description:
           'Displays the names of 20 location areas in the Pokemon world. Each subsequent use displays the next 20 areas.',
-        callback: commandMap,
+        callback: commandMap
       },
       mapb: {
         name: 'mapb',
         description:
           'Displays the names of 20 previous location areas in the Pokemon world.',
-        callback: commandMapb,
+        callback: commandMapb
       },
-    },
+      explore: {
+        name: 'explore',
+        description: 'Lists all pokemon in provided location.',
+        callback: commandExplore
+      }
+    }
   }
 }

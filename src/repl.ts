@@ -15,7 +15,7 @@ export function startREPL() {
         console.log('Unknown command')
       } else {
         try {
-          await commands[cleanIn[0]].callback(state)
+          await commands[cleanIn[0]].callback(state, cleanIn[1])
         } catch (error) {
           console.log(error)
         }
