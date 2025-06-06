@@ -5,16 +5,16 @@ import { cleanInput } from './repl'
 describe.each([
   {
     input: '  hello  world  ',
-    expected: ['hello', 'world'],
+    expected: ['hello', 'world']
   },
   {
     input: 'this is a robbery',
-    expected: ['this', 'is', 'a', 'robbery'],
+    expected: ['this', 'is', 'a', 'robbery']
   },
   {
     input: 'Not  on  my  watch!',
-    expected: ['not', 'on', 'my', 'watch!'],
-  },
+    expected: ['not', 'on', 'my', 'watch!']
+  }
 ])('cleanInput($input)', ({ input, expected }) => {
   test(`Expected: ${expected}`, () => {
     const actual = cleanInput(input)

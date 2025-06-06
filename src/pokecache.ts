@@ -1,7 +1,7 @@
-import { setInterval } from "timers"
+import { setInterval } from 'timers'
 
 type CacheEntry<T> = {
-  createdAt: number,
+  createdAt: number
   val: T
 }
 
@@ -18,7 +18,7 @@ export class Cache {
   #reap() {
     const now = Date.now()
     for (const [key, entry] of this.#cache) {
-      if(now - this.#interval > entry.createdAt) {
+      if (now - this.#interval > entry.createdAt) {
         this.#cache.delete(key)
       }
     }
