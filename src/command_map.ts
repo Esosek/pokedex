@@ -4,9 +4,7 @@ let mapCalledCount = 0
 
 export async function commandMap(state: State) {
   try {
-    const locations = await state.pokeAPI.fetchLocations(
-      mapCalledCount === 0 ? undefined : state.nextLocationsURL
-    )
+    const locations = await state.pokeAPI.fetchLocations(mapCalledCount === 0 ? undefined : state.nextLocationsURL)
     Object.values(locations).forEach((loc) => {
       console.log(loc.name)
     })
@@ -28,9 +26,7 @@ export async function commandMapb(state: State) {
     console.log("you're on the first page")
   } else {
     try {
-      const locations = await state.pokeAPI.fetchLocations(
-        state.prevLocationsURL
-      )
+      const locations = await state.pokeAPI.fetchLocations(state.prevLocationsURL)
       Object.values(locations).forEach((loc) => {
         console.log(loc.name)
       })
