@@ -49,6 +49,26 @@ export class PokeAPI {
       )
     }
   }
+
+  async fetchPokemon(pokemonName: string): Promise<Pokemon | undefined> {
+    const fullUrl = `${PokeAPI.baseURL}/pokemon/${pokemonName}`
+
+    try {
+      const res = await fetch(fullUrl)
+      if (!res.ok) {
+        return undefined
+      }
+      const body = await res.json()
+      return {
+        name: body.name,
+        base_experience: body.base_experience
+      } as Pokemon
+    } catch (error) {
+      throw new Error(
+        'You have failed to catch the Pokemon due to unexpected circumstances... Try again later...'
+      )
+    }
+  }
 }
 
 export type ShallowLocations = {
@@ -59,4 +79,9 @@ export type ShallowLocations = {
 export type Location = {
   name: string
   pokemon: string[]
+}
+
+export type Pokemon = {
+  name: string
+  base_experience: number
 }

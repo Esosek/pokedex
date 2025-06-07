@@ -1,11 +1,12 @@
 import { createInterface, type Interface } from 'readline'
 import { stdin, stdout } from 'node:process'
 
-import { PokeAPI } from './pokeapi.js'
+import { PokeAPI, Pokemon } from './pokeapi.js'
 import { commandExit } from './command_exit.js'
 import { commandHelp } from './command_help.js'
 import { commandMap, commandMapb } from './command_map.js'
 import { commandExplore } from './command_explore.js'
+import { commandCatch } from './command_catch.js'
 
 export type CLICommand = {
   name: string
@@ -18,6 +19,7 @@ export type State = {
   pokeAPI: PokeAPI
   nextLocationsURL: string
   prevLocationsURL: string
+  pokedex: Record<string, Pokemon>
   commands: Record<string, CLICommand>
 }
 
@@ -31,6 +33,7 @@ export function initState(): State {
     pokeAPI: new PokeAPI(),
     nextLocationsURL: '?offset=20',
     prevLocationsURL: '',
+    pokedex: {},
     commands: {
       exit: {
         name: 'exit',
@@ -58,6 +61,11 @@ export function initState(): State {
         name: 'explore',
         description: 'Lists all pokemon in provided location.',
         callback: commandExplore
+      },
+      catch: {
+        name: 'catch',
+        description: 'Attempts to catch a pokemon.',
+        callback: commandCatch
       }
     }
   }
