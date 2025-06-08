@@ -1,6 +1,7 @@
 import { State } from './state'
 import { Pokemon } from './pokeapi'
 
+// Chance of catching a pokemon
 const EXPERIENCE_THRESHOLD = 50
 
 export async function commandCatch(state: State, pokemonName: string) {
@@ -21,5 +22,5 @@ export async function commandCatch(state: State, pokemonName: string) {
 }
 
 function resolveCatch(pokemon: Pokemon) {
-  return Math.random() * pokemon.base_experience > EXPERIENCE_THRESHOLD
+  return Math.random() * pokemon.base_experience < EXPERIENCE_THRESHOLD
 }
