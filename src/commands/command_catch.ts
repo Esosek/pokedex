@@ -10,6 +10,7 @@ export async function commandCatch(state: State, pokemonName: string) {
     const pokemon = await state.pokeAPI.fetchPokemon(pokemonName)
     if (pokemon && resolveCatch(pokemon)) {
       console.log(`${pokemon.name} was caught!`)
+      console.log('You may now inspect it with the inspect command.')
       state.pokedex[pokemon.name] = pokemon
     } else {
       console.log(`${pokemonName} escaped!`)
