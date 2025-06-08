@@ -64,11 +64,10 @@ export class PokeAPI {
         base_experience: body.base_experience,
         height: body.height,
         weight: body.weight,
-        stats: body.stats.reduce(
-          (acc: Record<string, number>, stat: any) =>
-            (acc[stat.stat.name] = stat.base_stat),
-          {}
-        ),
+        stats: body.stats.reduce((acc: Record<string, number>, stat: any) => {
+          acc[stat.stat.name] = stat.base_stat
+          return acc
+        }, {}),
         types: body.types.map((type: any) => type.type.name)
       } as Pokemon
     } catch (error) {
