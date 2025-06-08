@@ -1,5 +1,5 @@
-import { State } from './state'
-import { Pokemon } from './pokeapi'
+import { State } from '../state'
+import { Pokemon } from '../pokeapi'
 
 // Chance of catching a pokemon
 const EXPERIENCE_THRESHOLD = 50

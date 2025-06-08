@@ -2,12 +2,12 @@ import { createInterface, type Interface } from 'readline'
 import { stdin, stdout } from 'node:process'
 
 import { PokeAPI, Pokemon } from './pokeapi.js'
-import { commandExit } from './command_exit.js'
-import { commandHelp } from './command_help.js'
-import { commandMap, commandMapb } from './command_map.js'
-import { commandExplore } from './command_explore.js'
-import { commandCatch } from './command_catch.js'
-import { commandInspect } from './command_inspect.js'
+import { commandExit } from './commands/command_exit.js'
+import { commandHelp } from './commands/command_help.js'
+import { commandMap, commandMapb } from './commands/command_map.js'
+import { commandExplore } from './commands/command_explore.js'
+import { commandCatch } from './commands/command_catch.js'
+import { commandInspect } from './commands/command_inspect.js'
 
 export type CLICommand = {
   name: string
